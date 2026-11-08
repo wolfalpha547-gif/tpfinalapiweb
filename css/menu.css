@@ -3,6 +3,7 @@
     height: 200px;
     border: 10px solid black;
     background-color: gray;
+    position: relative;
 }
 
 body {
@@ -23,4 +24,13 @@ img {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+}
+
+.pestañas{
+    display: inline-table;
+    width: 24.8vw;
+    height: 50px;
+    position: absolute;
+    top: 100%;
+    transform: translateY(-300px);
 }
