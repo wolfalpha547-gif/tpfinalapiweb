@@ -18,6 +18,13 @@ try {
         precio INTEGER NOT NULL,
         tipo TEXT NOT NULL
     )");
+    
+    $pdo->exec("CREATE TABLE IF NOT EXISTS ranking (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre_usuario TEXT NOT NULL,
+        puntuacion INTEGER NOT NULL,
+        fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
