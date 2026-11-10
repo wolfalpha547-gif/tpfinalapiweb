@@ -1,14 +1,19 @@
+body{
+    position: relative;
+}
+
 .barra{
     height: 125px;
     width: 5px;
     border: 5px solid red;
+    transition: all 0.3s;
 }
 .barraia {
-    position: fixed;
-    top: 0;
-    right: 0;
+    position: absolute;
     width: 5px; 
     height: 200px;
-    z-index: 1000;
+    top: 0%;
+    right: 0%;
     border: 5px solid blue;
+    transition: all 0.3s;
 }
