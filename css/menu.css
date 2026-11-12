@@ -44,6 +44,11 @@ body {
     margin: 0px;
 }
 
+.botones button img{
+    width: 20%;
+    height: 100%;
+}
+
 .esquina{
     display: inline-flex;
     width: 10vw;
@@ -67,7 +72,7 @@ body {
 }
 
 .activo{
-    border: 10px solid greenyellow;
+    border: 5px solid greenyellow;
 }
 
 .pestaña{
