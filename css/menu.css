@@ -79,6 +79,20 @@ body {
     color: orangered;
 }
 
+.usuario{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    font-size: 20px;
+}
+
+.usuario img{
+    height: 25px;
+}
+
 #configuraciones{
     background-color: grey;
 }
