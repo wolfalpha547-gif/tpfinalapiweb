@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <br><br>
             <br>
             <br><br>
-            <button type="submit" name="accion" value="registrar" id="registrar_skin">Crear cuenta</button>
+            <button type="submit" name="accion" value="registrar" id="registrar_skin">registrar skin</button>
         </form>
     </div>
     <script src="js/java.js"></script>
