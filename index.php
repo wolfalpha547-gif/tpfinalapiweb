@@ -1,11 +1,10 @@
 <?php
 session_start();
 
-$dbFile = __DIR__ . '/database.db';
+require_once 'conexionDB.php';
+$error = 'hubo un error';
 
 try {
-    $pdo = new PDO('sqlite:' . $dbFile);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,6 +30,7 @@ try {
 } catch (PDOException $e) {
     $mensaje = "Error de base de datos: " . $e->getMessage();
 }
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = trim($_POST['usuario'] ?? '');
     $contrasena = $_POST['contrasena'] ?? '';
@@ -62,8 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($user && password_verify($contrasena, $user['contrasena'])) {
                 $_SESSION['usuario_id'] = $user['id'];
-                $_SESSION['usuario_nombre'] = $user['usuario_nombre'];
-                header("Location: html/menu.html");
+                header("Location: menu/menu.php");
                 exit();
             } else {
                 $mensaje = "Usuario o contraseña incorrectos.";

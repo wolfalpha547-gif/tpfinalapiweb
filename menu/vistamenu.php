@@ -11,11 +11,11 @@
 
 <body>
     <div class="usuario">
-        <p>usuario  |<img src="../imagenes/dinero.png"> dinero</p>
+        <p><?= htmlspecialchars($usuario) ?>  |<img src="../imagenes/dinero.png"> <?= htmlspecialchars($monedas) ?></p>
     </div>
     <div class="esquina">
         <button id="configuraciones"><img src="../imagenes/config.png" alt="configuraciones"></button>
-        <button id="salir"><img src="../imagenes/salir.png" alt="salir"></button>
+        <button id="salir"><a href="../cerrarsesion.php"><img src="../imagenes/salir.png" alt="salir"></a></button>
     </div>
     <div id="marco">
         <div class="pestaña" name="jugar">JUGAR</div>
