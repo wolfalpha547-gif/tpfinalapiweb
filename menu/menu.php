@@ -16,5 +16,8 @@
     $usuario = $datosUsuario["usuario_nombre"];
     $monedas = $datosUsuario["monedas"];
 
+    $stmt = $pdo->query("SELECT id, nombre_skin, descripcion_skin, precio, tipo FROM skins");
+    $skins = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     require "vistamenu.php";
 ?>
