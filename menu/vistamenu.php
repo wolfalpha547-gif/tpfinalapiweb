@@ -19,7 +19,14 @@
     </div>
     <div id="marco">
         <div class="pestaña" name="jugar">JUGAR</div>
-        <div class="pestaña" name="tienda">TIENDA</div>
+        <div class="pestaña" name="tienda">
+            <?php foreach ($skins as $skin): ?>
+                <div>
+                    <p><?= htmlspecialchars($skin['nombre_skin']) ?></p>
+                    <button><?= htmlspecialchars($skin['precio']) ?></button>
+                </div>
+            <?php endforeach; ?>
+        </div>
         <div class="pestaña" name="aspectos">ASPECTOS</div>
         <div class="pestaña" name="rankings">RANKINGS</div>
     </div>
