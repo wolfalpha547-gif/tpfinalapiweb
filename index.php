@@ -5,6 +5,7 @@ require_once 'conexionDB.php';
 $error = 'hubo un error';
 
 try {
+    $pdo->exec("PRAGMA foreign_keys = ON;");
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -14,7 +15,7 @@ try {
     )");
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS skins (
-        skin_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         nombre_skin TEXT NOT NULL,
         descripcion_skin TEXT,
         precio INTEGER NOT NULL,
@@ -27,6 +28,15 @@ try {
         puntuacion INTEGER NOT NULL,
         fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS armarios(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id_usuario INTEGER NOT NULL,
+        id_skin INTEGER NOT NULL,
+        FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+        FOREIGN KEY (id_skin) REFERENCES skins(id)
+        )");
+    
 } catch (PDOException $e) {
     $mensaje = "Error de base de datos: " . $e->getMessage();
 }
@@ -41,13 +51,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         if ($accion === 'registrar') {
             try {
+                $pdo->beginTransaction();
+
                 $hashContrasena = password_hash($contrasena, PASSWORD_DEFAULT);
                 
                 $stmt = $pdo->prepare("INSERT INTO usuarios (usuario_nombre, contrasena, monedas) VALUES (?, ?, 100)");
                 $stmt->execute([$usuario, $hashContrasena]);
+
+                $nuevoUsuarioId = $pdo->lastInsertId();
+
+                $skinsPorDefecto = [1, 4, 7];
+                $stmtArmario = $pdo->prepare("INSERT INTO armarios (id_usuario, id_skin) VALUES (?, ?)");
+        
+                foreach ($skinsPorDefecto as $skinId) {
+                    $stmtArmario->execute([$nuevoUsuarioId, $skinId]);
+                }
+
+                $pdo->commit();
                 
                 $mensaje = "¡Cuenta creada con éxito! Ahora puedes iniciar sesión.";
             } catch (PDOException $e) {
+                if ($pdo->inTransaction()) {
+                    $pdo->rollBack();
+                }
                 if (strpos($e->getMessage(), 'UNIQUE') !== false || strpos($e->getMessage(), 'constraint failed') !== false) {
                     $mensaje = "El nombre de usuario ya está en uso.";
                 } else {
