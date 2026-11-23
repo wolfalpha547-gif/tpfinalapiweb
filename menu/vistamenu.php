@@ -32,13 +32,13 @@
         <div class="pestaña" name="tienda">
             <?php foreach ($skins as $skin): ?>
                 <div class="objeto">
-                    <p><?= htmlspecialchars($skin['nombre_skin']) ?></p>
+                    <img src="../imagenes/skins/<?= htmlspecialchars($skin['nombre_skin']) ?>.png">
                     <?php if (in_array((int) $skin['id'], $skinsCompradas, true)): ?>
                         <button type="button" disabled>Comprada</button>
                     <?php else: ?>
                         <form method="POST" action="compra_skin.php">
                             <input type="hidden" name="id_skin" value="<?= (int) $skin['id'] ?>">
-                            <button type="submit">Comprar - <?= htmlspecialchars($skin['precio']) ?></button>
+                            <button type="submit"><img src="../imagenes/dinero.png"> - <?= htmlspecialchars($skin['precio']) ?></button>
                         </form>
                     <?php endif; ?>
                 </div>
@@ -50,7 +50,7 @@
                 <?php if (in_array((int) $skin['id'], $skinsCompradas, true)): ?>
                     <?php $hayAspectos = true; ?>
                     <div class="objeto">
-                        <p><?= htmlspecialchars($skin['nombre_skin']) ?></p>
+                        <img src="../imagenes/skins/<?= htmlspecialchars($skin['nombre_skin']) ?>.png">
                         <?php if (($skinsSeleccionadas[$skin['tipo']] ?? null) === (int) $skin['id']): ?>
                             <button type="button" disabled>Seleccionada</button>
                         <?php else: ?>
