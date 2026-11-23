@@ -1,19 +1,11 @@
-body{
-    position: relative;
-}
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
 
-.barra{
-    height: 125px;
-    width: 5px;
-    border: 5px solid red;
-    transition: all 0.3s;
-}
-.barraia {
-    position: absolute;
-    width: 5px; 
-    height: 200px;
-    top: 0%;
-    right: 0%;
-    border: 5px solid blue;
-    transition: all 0.3s;
-}
+  body {
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
