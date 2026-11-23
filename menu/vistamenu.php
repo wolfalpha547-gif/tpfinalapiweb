@@ -21,7 +21,7 @@
         <div class="pestaña" name="jugar">JUGAR</div>
         <div class="pestaña" name="tienda">
             <?php foreach ($skins as $skin): ?>
-                <div>
+                <div class="objeto">
                     <p><?= htmlspecialchars($skin['nombre_skin']) ?></p>
                     <button><?= htmlspecialchars($skin['precio']) ?></button>
                 </div>
