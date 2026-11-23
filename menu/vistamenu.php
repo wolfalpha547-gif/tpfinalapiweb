@@ -19,7 +19,9 @@
     </div>
     <div id="marco">
         <div class="pestaña" name="jugar">
-            <form method="POST" action="url juego.php">
+            <form method="POST" action="../php/juego.php">
+                <input type="hidden" name="usuario_id" value="<?= (int) $_SESSION['usuario_id'] ?>">
+                <input type="hidden" name="usuario" value="<?= htmlspecialchars($usuario, ENT_QUOTES, 'UTF-8') ?>">
                 <?php foreach ($skinsSeleccionadas as $tipo => $idSkin): ?>
                     <input type="hidden" name="skins[<?= htmlspecialchars($tipo, ENT_QUOTES, 'UTF-8') ?>]" value="<?= (int) $idSkin ?>">
                 <?php endforeach; ?>
@@ -63,7 +65,22 @@
             <?php endforeach; ?>
             
         </div>
-        <div class="pestaña" name="rankings">RANKINGS</div>
+        <div class="pestaña" name="rankings">
+            <h2>Ranking</h2>
+            <?php if (empty($ranking)): ?>
+                <p>Todavía no hay partidas registradas.</p>
+            <?php else: ?>
+                <ol>
+                    <?php foreach ($ranking as $resultado): ?>
+                        <li>
+                            <?= htmlspecialchars($resultado['nombre_usuario'], ENT_QUOTES, 'UTF-8') ?>
+                            - <?= (int) $resultado['puntuacion'] ?> puntos
+                            - <?= htmlspecialchars($resultado['fecha'], ENT_QUOTES, 'UTF-8') ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            <?php endif; ?>
+        </div>
     </div>
     <div class="botones">
         <button id="jugar" class="ventana"><img src="../imagenes/jugar.png" alt="jugar"></button>
