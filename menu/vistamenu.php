@@ -18,6 +18,9 @@
         <button id="salir"><a href="../cerrarsesion.php"><img src="../imagenes/salir.png" alt="salir"></a></button>
     </div>
     <div id="marco">
+        <div class="config">
+            <button class="cerrar">X</button>
+        </div>
         <div class="pestaña" name="jugar">
             <form method="POST" action="../php/juego.php">
                 <input type="hidden" name="usuario_id" value="<?= (int) $_SESSION['usuario_id'] ?>">
@@ -25,7 +28,7 @@
                 <?php foreach ($skinsSeleccionadas as $tipo => $idSkin): ?>
                     <input type="hidden" name="skins[<?= htmlspecialchars($tipo, ENT_QUOTES, 'UTF-8') ?>]" value="<?= (int) $idSkin ?>">
                 <?php endforeach; ?>
-                <button type="submit">Jugar</button>
+                <button type="submit" class="botonjugar">Jugar</button>
             </form>
         </div>
         <div class="pestaña" name="tienda">

@@ -2,6 +2,19 @@
 let ventana = document.getElementById("marco")
 let botones = document.querySelectorAll(".ventana")
 let pestaña = document.querySelectorAll(".pestaña")
+let botonconfig = document.getElementById("configuraciones")
+let config = document.querySelector(".config")
+let cerrarconfig = document.querySelector(".cerrar")
+
+config.style.display = "none";
+
+botonconfig.addEventListener('click', () =>{
+    config.style.display = "";
+})
+
+cerrarconfig.addEventListener('click', () =>{
+    config.style.display = "none";
+})
 
 botones.forEach(boton => {
     boton.addEventListener('click', (evento) => {
