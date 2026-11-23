@@ -24,6 +24,9 @@ body {
     max-height: 200px;
     border: 10px solid black;
     background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .botones{

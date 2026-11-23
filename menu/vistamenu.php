@@ -12,9 +12,6 @@
 <body>
     <div class="usuario">
         <p><?= htmlspecialchars($usuario) ?>  |<img src="../imagenes/dinero.png"> <?= htmlspecialchars($monedas) ?></p>
-        <?php if ($mensaje !== ''): ?>
-            <p role="status"><?= htmlspecialchars($mensaje) ?></p>
-        <?php endif; ?>
     </div>
     <div class="esquina">
         <button id="configuraciones"><img src="../imagenes/config.png" alt="configuraciones"></button>
@@ -31,13 +28,14 @@
         </div>
         <div class="pestaña" name="tienda">
             <?php foreach ($skins as $skin): ?>
-                <div class="objeto">
+                <div class="objeto" data-descripcion="<?= htmlspecialchars($skin['descripcion_skin'], ENT_QUOTES, 'UTF-8') ?>">
                     <img src="../imagenes/skins/<?= htmlspecialchars($skin['nombre_skin']) ?>.png">
                     <?php if (in_array((int) $skin['id'], $skinsCompradas, true)): ?>
                         <button type="button" disabled>Comprada</button>
                     <?php else: ?>
                         <form method="POST" action="compra_skin.php">
                             <input type="hidden" name="id_skin" value="<?= (int) $skin['id'] ?>">
+                            <input type="hidden" name="pestana" value="tienda">
                             <button type="submit"><img src="../imagenes/dinero.png"> - <?= htmlspecialchars($skin['precio']) ?></button>
                         </form>
                     <?php endif; ?>
@@ -75,7 +73,7 @@
     </div>
 
     <div id="info">
-        <p>hola</p>
+        <p role="status"><?= $mensaje !== '' ? htmlspecialchars($mensaje) : '' ?></p>
     </div>
     <script src="../js/menu.js"></script>
 </body>

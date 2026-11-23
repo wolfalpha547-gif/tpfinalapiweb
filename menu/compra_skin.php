@@ -9,16 +9,17 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: menu.php");
+    header("Location: menu.php?pestana=tienda");
     exit;
 }
 
+$menuUrl = 'menu.php' . (($_POST['pestana'] ?? '') === 'tienda' ? '?pestana=tienda' : '');
 $usuarioId = (int) $_SESSION['usuario_id'];
 $idSkin = filter_input(INPUT_POST, 'id_skin', FILTER_VALIDATE_INT);
 
 if (!$idSkin || $idSkin < 1) {
     $_SESSION['mensaje_tienda'] = "La skin seleccionada no es válida.";
-    header("Location: menu.php");
+    header("Location: " . $menuUrl);
     exit;
 }
 
@@ -32,7 +33,7 @@ try {
     if ($precio === false) {
         $pdo->rollBack();
         $_SESSION['mensaje_tienda'] = "La skin seleccionada no existe.";
-        header("Location: menu.php");
+        header("Location: " . $menuUrl);
         exit;
     }
 
@@ -41,7 +42,7 @@ try {
         error_log("Precio negativo configurado para la skin {$idSkin}.");
         $pdo->rollBack();
         $_SESSION['mensaje_tienda'] = "No se pudo completar la compra. Inténtalo nuevamente.";
-        header("Location: menu.php");
+        header("Location: " . $menuUrl);
         exit;
     }
 
@@ -53,7 +54,7 @@ try {
     if ($stmt->fetchColumn()) {
         $pdo->rollBack();
         $_SESSION['mensaje_tienda'] = "Ya tienes esta skin.";
-        header("Location: menu.php");
+        header("Location: " . $menuUrl);
         exit;
     }
 
@@ -71,7 +72,7 @@ try {
     if ($stmt->rowCount() !== 1) {
         $pdo->rollBack();
         $_SESSION['mensaje_tienda'] = "No tienes monedas suficientes para comprar esta skin.";
-        header("Location: menu.php");
+        header("Location: " . $menuUrl);
         exit;
     }
 
@@ -90,6 +91,6 @@ try {
     $_SESSION['mensaje_tienda'] = "No se pudo completar la compra. Inténtalo nuevamente.";
 }
 
-header("Location: menu.php");
+header("Location: " . $menuUrl);
 exit;
 ?>

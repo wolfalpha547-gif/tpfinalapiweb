@@ -26,5 +26,31 @@ botones.forEach(boton => {
     });
 });
 
-const pestanaInicial = new URLSearchParams(window.location.search).get("pestana")
-document.querySelector(pestanaInicial === "aspectos" ? "#aspectos" : "#jugar").click()
+window.addEventListener("DOMContentLoaded", () => {
+    const navEntry = performance.getEntriesByType("navigation")[0];
+    const esRecarga = navEntry && navEntry.type === "reload";
+
+    const pestanaUrl = new URLSearchParams(window.location.search).get("pestana");
+    const pestanasValidas = ["jugar", "tienda", "aspectos", "rankings"];
+
+    let pestanaDestino = "jugar";
+
+    if (!esRecarga && pestanasValidas.includes(pestanaUrl)) {
+        pestanaDestino = pestanaUrl;
+    }
+
+    document.querySelector(`#${pestanaDestino}`).click();
+});
+
+const info = document.querySelector("#info [role='status']")
+const mensajeOriginal = info.textContent
+
+document.querySelectorAll('.pestaña[name="tienda"] .objeto').forEach(objeto => {
+    objeto.addEventListener("mouseenter", () => {
+        info.textContent = objeto.dataset.descripcion || "Esta skin no tiene descripción."
+    })
+
+    objeto.addEventListener("mouseleave", () => {
+        info.textContent = mensajeOriginal
+    })
+})
