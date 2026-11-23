@@ -39,5 +39,13 @@
     $stmt->execute(['id' => $usuarioId]);
     $skinsSeleccionadas = array_map('intval', $stmt->fetchAll(PDO::FETCH_KEY_PAIR));
 
+    $stmt = $pdo->query(
+        "SELECT nombre_usuario, puntuacion, fecha
+         FROM ranking
+         ORDER BY puntuacion DESC, fecha DESC
+         LIMIT 10"
+    );
+    $ranking = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     require "vistamenu.php";
 ?>
