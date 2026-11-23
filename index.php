@@ -11,7 +11,8 @@ try {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         usuario_nombre TEXT NOT NULL UNIQUE,
         contrasena TEXT NOT NULL,
-        monedas INTEGER DEFAULT 0
+        monedas INTEGER DEFAULT 0,
+        skin_seleccionada INTEGER
     )");
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS skins (
@@ -36,6 +37,8 @@ try {
         FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
         FOREIGN KEY (id_skin) REFERENCES skins(id)
         )");
+
+    ensureSkinSelectionSchema($pdo);
     
 } catch (PDOException $e) {
     $mensaje = "Error de base de datos: " . $e->getMessage();

@@ -26,5 +26,5 @@ botones.forEach(boton => {
     });
 });
 
-let inicio = document.querySelector("#jugar")
-inicio.click()
+const pestanaInicial = new URLSearchParams(window.location.search).get("pestana")
+document.querySelector(pestanaInicial === "aspectos" ? "#aspectos" : "#jugar").click()
