@@ -111,8 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div id="login">
         <form class="centrar" method="POST" action="">
-            <h1 class="text text-center">TITULO JUEGO</h1>
-            <h2 class="text text-center">subtitulo</h2>
+            <h1 class="text text-center">Pong</h1>
+            <h2 class="text text-center">Primer Videojuego</h2>
             <br>
             <?php if (!empty($mensaje)): ?>
                 <div class="alert">
